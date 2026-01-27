@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Greevo - Software gestione scontrini e fatture per commercianti. Digitalizza documenti, risparmia tempo e carta.">
+    <title>Greevo - Gestione Documentale per Commercianti e Imprese</title>
+    
+    <!-- Analytics Plausible -->
+    <script defer data-domain="greevo.app" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #7ed321;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.studio-link {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #6cb91e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(126, 211, 33, 0.3);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button-primary {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .button-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .button-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .problem {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .problem-card p {
+            color: var(--gray);
+        }
+
+        .solution {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .how-it-works {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .step-card p {
+            color: var(--gray);
+        }
+
+        .benefits {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--secondary), #5cb85c);
+            color: white;
+            text-align: center;
+        }
+
+        .benefits h2 {
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            text-align: center;
+        }
+
+        .benefit-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .pricing {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .plan-description {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.7rem 0;
+            color: var(--dark);
+        }
+
+        .plan-features li::before {
+            content: '✓ ';
+            color: var(--secondary);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        .plan-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .plan-button.primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .plan-button.secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .plan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .roi-calculator {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .roi-calculator h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .roi-item {
+            text-align: center;
+        }
+
+        .roi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .final-cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Greevo</div>
+            <ul class="nav-links">
+                <li><a href="#problema">Problema</a></li>
+                <li><a href="#soluzione">Soluzione</a></li>
+                <li><a href="#come-funziona">Come Funziona</a></li>
+                <li><a href="#pricing">Prezzi</a></li>
+                <li><a href="greevo-studio.html" class="studio-link">Sei un Commercialista?</a></li>
+            </ul>
+            <a href="#contatti" class="cta-button">Prova Gratis</a>
+            <button class="mobile-menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Basta Scontrini Cartacei.<br>Digitalizza Tutto in un Click.</h1>
+            <p>Per commercianti e piccole imprese che vogliono eliminare carta,<br>risparmiare tempo e semplificare la contabilità.</p>
+            <div class="hero-buttons">
+                <a href="#contatti" class="button-primary">Prova Gratis 14 Giorni</a>
+                <a href="#come-funziona" class="button-secondary">Guarda Come Funziona</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problema" class="problem">
+        <div class="container">
+            <h2 class="section-title">Perché Continuare a Sprecare Tempo e Carta?</h2>
+            <p class="section-subtitle">Gestire scontrini cartacei costa tempo, soldi e danneggia l'ambiente</p>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>10-15 Ore al Mese</h3>
+                    <p>Perse a organizzare, archiviare, cercare e ritrovare scontrini e documenti cartacei</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📄</div>
+                    <h3>Documenti Persi</h3>
+                    <p>1 commerciante su 3 perde documentazione importante ogni anno, rischiando problemi fiscali</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">💰</div>
+                    <h3>€300-500/Anno</h3>
+                    <p>Sprecati solo in carta termica, toner, archivi fisici. Senza contare il tempo del personale</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🌳</div>
+                    <h3>1 Albero/Anno</h3>
+                    <p>Ogni commerciante consuma in media 100kg di carta all'anno, equivalente a 1 albero abbattuto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="soluzione" class="solution">
+        <div class="container">
+            <h2 class="section-title">Greevo: Il Tuo Archivio Digitale Intelligente</h2>
+            <p class="section-subtitle">Fotografa lo scontrino. Il resto lo facciamo noi.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Upload Istantaneo</h3>
+                    <p>Fotografi lo scontrino con lo smartphone o carichi il PDF. In 2 secondi è archiviato nel cloud sicuro.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>OCR Intelligente</h3>
+                    <p>L'intelligenza artificiale legge ed estrae automaticamente: importo, data, venditore e categoria. Zero inserimento manuale.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Dashboard Completa</h3>
+                    <p>Visualizza tutte le spese organizzate per categoria, periodo, fornitore. Grafici chiari e report sempre aggiornati.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📥</div>
+                    <h3>Export per Commercialista</h3>
+                    <p>Esporta in Excel o PDF con un click. Formato già pronto per il commercialista o la dichiarazione dei redditi.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Condividi con Commercialista</h3>
+                    <p>Dai accesso al tuo commercialista. Lui vede i tuoi documenti in tempo reale, niente più email o WhatsApp.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Sicuro e Conforme GDPR</h3>
+                    <p>Backup automatico, crittografia militare, conforme normative europee. I tuoi dati sono più sicuri che in un cassetto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="come-funziona" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Semplice Come 1-2-3</h2>
+            <p class="section-subtitle">Inizia in 3 passaggi, nessuna configurazione complicata</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Fotografa</h3>
+                    <p>Scatta una foto allo scontrino con l'app mobile o carica il PDF dal computer</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Sistema Automatico</h3>
+                    <p>L'OCR estrae tutti i dati, categorizza automaticamente e archivia in modo sicuro nel cloud</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Visualizza & Esporta</h3>
+                    <p>Accedi ai documenti da qualsiasi dispositivo. Esporta per il commercialista quando serve</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Risparmio Reale, Misurabile</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.95);">Clienti Greevo risparmiano in media:</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-number">10-15h</div>
+                    <div class="benefit-label">Al mese risparmiate in gestione documenti</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">€300+</div>
+                    <div class="benefit-label">All'anno in costi diretti carta e archivio</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">100%</div>
+                    <div class="benefit-label">Documenti ritrovabili in 3 secondi</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">1 🌳</div>
+                    <div class="benefit-label">Albero salvato all'anno per attività</div>
+                </div>
+            </div>
+
+            <div class="roi-calculator">
+                <h3>Il Tuo ROI con Greevo</h3>
+                <div class="roi-grid">
+                    <div class="roi-item">
+                        <div class="roi-value">€39</div>
+                        <div class="roi-label">Costo mensile Piano Business</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">12h</div>
+                        <div class="roi-label">Risparmiate al mese (media)</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">€180</div>
+                        <div class="roi-label">Valore del tempo risparmiato (12h × €15/h)</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">362%</div>
+                        <div class="roi-label">ROI mensile (€180 / €39)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Prezzi Trasparenti, Nessun Costo Nascosto</h2>
+            <p class="section-subtitle">Scegli il piano giusto per la tua attività. Prova gratis per 14 giorni, senza carta di credito.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">€19<span>/mese</span></div>
+                    <div class="plan-description">Per chi vuole iniziare senza impegno</div>
+                    <ul class="plan-features">
+                        <li>1 attività</li>
+                        <li>200 documenti al mese</li>
+                        <li>OCR automatico</li>
+                        <li>Export PDF</li>
+                        <li>1 utente + 1 commercialista</li>
+                        <li>App mobile iOS & Android</li>
+                        <li>Supporto email</li>
+                    </ul>
+                    <button class="plan-button secondary" onclick="window.location.href='#contatti'">Prova Gratis 14 Giorni</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="featured-badge">✨ Più Popolare</div>
+                    <div class="plan-name">Business</div>
+                    <div class="plan-price">€39<span>/mese</span></div>
+                    <div class="plan-description">Perfetto per la maggior parte delle attività</div>
+                    <ul class="plan-features">
+                        <li>1 attività</li>
+                        <li>Documenti illimitati</li>
+                        <li>OCR + AI categorizzazione</li>
+                        <li>Dashboard analytics completa</li>
+                        <li>Export Excel, CSV, PDF</li>
+                        <li>Fino a 3 utenti</li>
+                        <li>Categorie personalizzate</li>
+                        <li>Ricerca avanzata</li>
+                        <li>Supporto prioritario</li>
+                    </ul>
+                    <button class="plan-button primary" onclick="window.location.href='#contatti'">Inizia Prova Gratuita</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-price">€79<span>/mese</span></div>
+                    <div class="plan-description">Per attività che vogliono il massimo</div>
+                    <ul class="plan-features">
+                        <li>1 attività</li>
+                        <li>Tutto del piano Business +</li>
+                        <li>Integrazione POS (in arrivo)</li>
+                        <li>API access</li>
+                        <li>Analytics avanzate</li>
+                        <li>Utenti illimitati</li>
+                        <li>White label opzionale</li>
+                        <li>Onboarding personalizzato</li>
+                        <li>Account manager dedicato</li>
+                        <li>SLA garantito</li>
+                    </ul>
+                    <button class="plan-button secondary" onclick="window.location.href='#contatti'">Contattaci</button>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 3rem; color: var(--gray);">
+                💼 <strong>Sei un commercialista con più clienti?</strong> 
+                <a href="greevo-studio.html" style="color: var(--secondary); font-weight: 600;">Scopri i piani per studi →</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="contatti" class="final-cta">
+        <div class="container">
+            <h2>Pronto a Eliminare la Carta?</h2>
+            <p>Inizia la prova gratuita di 14 giorni. Nessuna carta di credito richiesta.<br>Puoi cancellarla in qualsiasi momento.</p>
+            <a href="mailto:info@greevo.app?subject=Richiesta Prova Gratuita" class="button-primary">Inizia Prova Gratuita</a>
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.9;">
+                O scrivici a: <strong>info@greevo.app</strong>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Prodotto</h3>
+                    <ul>
+                        <li><a href="#soluzione">Features</a></li>
+                        <li><a href="#pricing">Prezzi</a></li>
+                        <li><a href="#come-funziona">Come Funziona</a></li>
+                        <li><a href="greevo-studio.html">Per Commercialisti</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Supporto</h3>
+                    <ul>
+                        <li><a href="mailto:info@greevo.app">Contatti</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Guida</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legale</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Termini di Servizio</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Greevo. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+                    <h3>Greevo</h3>
+                    <p>Gestione documentale intelligente<br>per commercianti e imprese</p>
+                </div>
+                <div class="footer-section">

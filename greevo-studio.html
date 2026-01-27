@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Greevo Studio - Software gestione documentale per studi commercialisti. Gestisci tutti i tuoi clienti da un'unica piattaforma.">
+    <title>Greevo Studio - Gestione Documentale per Commercialisti</title>
+    
+    <script defer data-domain="greevo.app" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #7ed321;
+            --accent: #f59e0b;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--accent) 0%, #dc2626 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button-primary {
+            background: white;
+            color: var(--accent);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .button-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .button-secondary:hover {
+            background: white;
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .problem-card p {
+            color: var(--gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .benefits {
+            background: linear-gradient(135deg, var(--secondary), #5cb85c);
+            color: white;
+        }
+
+        .benefits h2 {
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .benefit-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-label {
+            font-size: 1rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .plan-clients {
+            background: var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .plan-description {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.7rem 0;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li::before {
+            content: '✓ ';
+            color: var(--secondary);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        .plan-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .plan-button.primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .plan-button.secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .plan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .revenue-calculator {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .revenue-calculator h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calc-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-radius: 15px;
+        }
+
+        .calc-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .final-cta {
+            background: linear-gradient(135deg, var(--accent), #dc2626);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            color: white;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div>
+                <div class="logo">Greevo</div>
+                <div class="logo-subtitle">Studio Edition</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#problema">Per Chi</a></li>
+                <li><a href="#soluzione">Features</a></li>
+                <li><a href="#pricing">Prezzi</a></li>
+                <li><a href="index.html">Per Commercianti</a></li>
+            </ul>
+            <a href="#contatti" class="cta-button">Richiedi Demo</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Gestisci Tutti i Tuoi Clienti<br>da Un'Unica Piattaforma</h1>
+            <p>Software documentale professionale per studi commercialisti.<br>Clienti organizzati, tu più produttivo, loro più soddisfatti.</p>
+            <div class="hero-buttons">
+                <a href="#contatti" class="button-primary">Prenota Demo Gratuita</a>
+                <a href="#pricing" class="button-secondary">Vedi Prezzi</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problema" class="section" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Problemi che Risolviamo per il Tuo Studio</h2>
+            <p class="section-subtitle">Gestire documenti di 30+ clienti è caotico, richiede tempo e genera frustrazione</p>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📧</div>
+                    <h3>Email e WhatsApp Infiniti</h3>
+                    <p>"Mi manda gli scontrini?" ripetuto 50 volte al mese. Documenti sparsi tra email, WhatsApp, Telegram.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔍</div>
+                    <h3>Ricerca Documenti Impossibile</h3>
+                    <p>"Dov'è quello scontrino di marzo?" Ore perse a cercare tra cartelle, allegati, messaggi.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Solleciti Continui</h3>
+                    <p>Chiamare ogni cliente prima della scadenza: "Mi servono i documenti!" Lavoro ripetitivo e frustrante.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">😤</div>
+                    <h3>Clienti Disorganizzati</h3>
+                    <p>Buste piene di scontrini portate a fine anno. Devi organizzare TU i loro documenti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="soluzione" class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">Greevo Studio: La Soluzione Completa</h2>
+            <p class="section-subtitle">Una piattaforma centralizzata per gestire la documentazione di tutti i tuoi clienti</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Dashboard Multi-Cliente</h3>
+                    <p>Vedi tutti i tuoi clienti in un colpo d'occhio. Stato documentazione, scadenze, alert automatici. Tutto organizzato.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3>Clienti Caricano Autonomamente</h3>
+                    <p>Dai accesso ai clienti. Loro fotografano e caricano. Tu ricevi tutto già organizzato. Fine email e WhatsApp.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>OCR e Categorizzazione Auto</h3>
+                    <p>L'AI estrae dati ed categorizza automaticamente. Tu verifichi solo, non inserisci manualmente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Report Consolidati</h3>
+                    <p>Export per tutti i clienti con un click. Dati aggregati, report mensili automatici, analisi comparative.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Alert e Solleciti Automatici</h3>
+                    <p>Sistema manda promemoria ai clienti automaticamente. "Documenti mancanti per questo mese." Tu non fai nulla.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>White Label (Opzionale)</h3>
+                    <p>Brandizza con logo del tuo studio. Clienti vedono il TUO marchio, non Greevo. Servizio premium percepito.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section benefits">
+        <div class="container">
+            <h2 class="section-title">Vantaggi Concreti per il Tuo Studio</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-number">20h</div>
+                    <div class="benefit-label">Al mese risparmiate in gestione documenti clienti</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">80%</div>
+                    <div class="benefit-label">Riduzione email/messaggi per sollecitare documenti</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">€50+</div>
+                    <div class="benefit-label">Revenue extra al mese per cliente (servizio premium)</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">5⭐</div>
+                    <div class="benefit-label">Soddisfazione clienti aumentata significativamente</div>
+                </div>
+            </div>
+
+            <div class="revenue-calculator">
+                <h3>💰 Modello Revenue per il Tuo Studio</h3>
+                <div class="calc-grid">
+                    <div class="calc-item">
+                        <div class="calc-label">Hai 40 clienti</div>
+                    </div>
+                    <div class="calc-item">
+                        <div class="calc-label">Offri servizio Greevo a €10/mese per cliente</div>
+                    </div>
+                    <div class="calc-item">
+                        <div class="calc-value">€400</div>
+                        <div class="calc-label">Revenue mensile totale</div>
+                    </div>
+                    <div class="calc-item">
+                        <div class="calc-value">€199</div>
+                        <div class="calc-label">Costo piano Studio Pro</div>
+                    </div>
+                    <div class="calc-item">
+                        <div class="calc-value">€201</div>
+                        <div class="calc-label">Guadagno netto mensile</div>
+                    </div>
+                    <div class="calc-item">
+                        <div class="calc-value">€2.412</div>
+                        <div class="calc-label">Guadagno netto annuale</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: var(--gray); margin-top: 2rem;">
+                    <strong>Bonus:</strong> Clienti più organizzati = meno lavoro per te = più clienti puoi gestire
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Piani per Studi Commercialisti</h2>
+            <p class="section-subtitle">Prezzi scalabili in base al numero di clienti che gestisci</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Studio</div>
+                    <div class="plan-price">€149<span>/mese</span></div>
+                    <div class="plan-clients">Fino a 30 clienti aziende</div>
+                    <div class="plan-description">Per studi piccoli/medi</div>
+                    <ul class="plan-features">
+                        <li>Fino a 30 clienti aziende</li>
+                        <li>Documenti illimitati per tutti</li>
+                        <li>Dashboard consolidata multi-cliente</li>
+                        <li>OCR + AI per tutti i clienti</li>
+                        <li>Export aggregati Excel/PDF</li>
+                        <li>Accessi utenti illimitati</li>
+                        <li>Alert automatici a clienti</li>
+                        <li>Report mensili automatici</li>
+                        <li>Training clienti incluso</li>
+                        <li>Supporto prioritario</li>
+                    </ul>
+                    <button class="plan-button secondary" onclick="window.location.href='#contatti'">Prenota Demo</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="featured-badge">⭐ Più Richiesto</div>
+                    <div class="plan-name">Studio Pro</div>
+                    <div class="plan-price">€299<span>/mese</span></div>
+                    <div class="plan-clients">Fino a 80 clienti aziende</div>
+                    <div class="plan-description">Per studi in crescita</div>
+                    <ul class="plan-features">
+                        <li>Fino a 80 clienti aziende</li>
+                        <li>Tutto del piano Studio +</li>
+                        <li>White label (tuo logo e brand)</li>
+                        <li>Analytics avanzate comparative</li>
+                        <li>Export automatizzati programmabili</li>
+                        <li>API access per integrazioni</li>
+                        <li>Onboarding clienti assistito</li>
+                        <li>Account manager dedicato</li>
+                        <li>Reportistica personalizzata</li>
+                        <li>Video tutorial custom</li>
+                    </ul>
+                    <button class="plan-button primary" onclick="window.location.href='#contatti'">Inizia Prova 30 Giorni</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">Custom</div>
+                    <div class="plan-clients">Clienti illimitati</div>
+                    <div class="plan-description">Per studi grandi/associazioni</div>
+                    <ul class="plan-features">
+                        <li>Clienti illimitati</li>
+                        <li>Tutto del piano Studio Pro +</li>
+                        <li>Infrastruttura dedicata</li>
+                        <li>SLA 99.9% garantito</li>
+                        <li>Personalizzazioni workflow</li>
+                        <li>Integrazioni custom</li>
+                        <li>Team dedicato Greevo</li>
+                        <li>Training in sede</li>
+                        <li>Supporto H24/7</li>
+                        <li>Contratto multi-anno scontato</li>
+                    </ul>
+                    <button class="plan-button secondary" onclick="window.location.href='#contatti'">Contattaci</button>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 3rem; color: var(--gray);">
+                💡 <strong>Tutti i piani includono:</strong> Prova gratuita, nessun setup fee, cancellazione in qualsiasi momento
+            </p>
+        </div>
+    </section>
+
+    <section id="contatti" class="section final-cta">
+        <div class="container">
+            <h2>Pronto a Digitalizzare il Tuo Studio?</h2>
+            <p>Prenota una demo personalizzata. Ti mostriamo come Greevo si adatta al tuo workflow.<br>30 minuti che cambieranno il modo di gestire i clienti.</p>
+            <a href="mailto:info@greevo.app?subject=Richiesta Demo Greevo Studio" class="button-primary">Prenota Demo Gratuita</a>
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.9;">
+                O chiamaci al: <strong>+39 XXX XXX XXXX</strong> | Email: <strong>studio@greevo.app</strong>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Greevo Studio</h3>
+                    <p>Gestione documentale<br>per commercialisti</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Prodotto</h3>
+                    <ul>
+                        <li><a href="#soluzione">Features</a></li>
+                        <li><a href="#pricing">Prezzi</a></li>
+                        <li><a href="index.html">Per Commercianti</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Supporto</h3>
+                    <ul>
+                        <li><a href="mailto:studio@greevo.app">Contatti</a></li>
+                        <li><a href="#">Case Study</a></li>
+                        <li><a href="#">Documentazione</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legale</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Termini di Servizio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Greevo. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -547,30 +547,56 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+    .hero h1 {
+        font-size: 2rem;
+    }
 
-            .hero p {
-                font-size: 1.1rem;
-            }
+    .hero p {
+        font-size: 1.1rem;
+    }
 
-            .nav-links {
-                display: none;
-            }
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        z-index: 99;
+    }
 
-            .mobile-menu-toggle {
-                display: block;
-            }
+    .nav-links.active {
+        display: flex !important;
+    }
 
-            .section-title {
-                font-size: 2rem;
-            }
+    .nav-links a {
+        padding: 1rem;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 1.1rem;
+    }
 
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-        }
+    .nav-links a.studio-link {
+        background: #7ed321;
+        color: white;
+        border-radius: 8px;
+        margin-top: 1rem;
+        border: none;
+        text-align: center;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        color: var(--dark);
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -872,6 +898,19 @@
             });
         });
     </script>
+    <script>
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        });
+        
+        // Chiudi menu quando clicchi su un link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        </script>
 </body>
 </html>
                     <h3>Greevo</h3>
